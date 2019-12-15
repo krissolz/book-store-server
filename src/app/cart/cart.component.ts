@@ -58,7 +58,7 @@ export class CartComponent implements OnInit {
   }
 
   checkFormData(){
-
+    console.log( this.form.nativeElement )
   }
 
   ngOnInit() {

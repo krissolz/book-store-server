@@ -4,5 +4,5 @@ export const environment = {
   more: 3,
   pageingNumber: 10,
   mobilePagingNum: 3,
-  mobile: 450
+  mobileRes: 450
 };

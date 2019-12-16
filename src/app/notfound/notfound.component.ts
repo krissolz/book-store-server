@@ -20,8 +20,8 @@ const errors: Error = {
 })
 export class NotfoundComponent implements OnInit {
 
-  private error: string;
-  private code: string;
+  public error: string;
+  public code: string;
 
   constructor(
     private route: ActivatedRoute

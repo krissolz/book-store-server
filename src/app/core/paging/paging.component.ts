@@ -22,11 +22,11 @@ export class PagingComponent implements OnInit, OnChanges {
 
   @Input('pages') books: Book[];
 
-  private page: number;
+  public page: number;
   private bookObserve: BehaviorSubject<Book[]>;
-  private paging: Book[];
-  private start: number;
-  private pageimgNumber: number;
+  public paging: Book[];
+  public start: number;
+  public pageimgNumber: number;
 
   constructor(
     private route: ActivatedRoute,

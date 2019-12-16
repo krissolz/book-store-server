@@ -13,6 +13,7 @@ import { Book, LineItems, ICustomerOrder } from '../models';
 
 const POST_URL: string = environment.postURL;
 const getBooksUrl: string = environment.getUrl;
+const $ = (selector: string): HTMLElement => document.querySelector(selector);
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -87,6 +88,10 @@ export class BooksService {
 
   width$(): number{
     return Math.max( document.body.offsetWidth, document.documentElement.offsetWidth );
+  }
+
+  get(selector: string) : HTMLElement {
+    return $(selector);
   }
 
 }

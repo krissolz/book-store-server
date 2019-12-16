@@ -7,6 +7,7 @@ import { Book, FormFields, ICustomerOrder } from 'src/app/core/models';
 import { BooksService } from 'src/app/core/services/books.service';
 import { pipe } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -29,6 +30,7 @@ export class CartComponent implements OnInit {
   constructor(
     private store$: Store<RouterState>,
     private book$: BooksService,
+    private router: Router,
   ) {
     this.total = null;
     this.order = false;
@@ -85,11 +87,17 @@ export class CartComponent implements OnInit {
       }, this.formFields, {});
 
       // make post request here
-      console.log('customerOrder: \n\r', this.customerOrder);
+      console.log('Customer Order: \n', this.customerOrder);
 
       this.book$.orderBook(this.customerOrder).subscribe(
-        res => console.log('SendFormData result: ', res),
-        err => console.log('SendFormData error: ', err, Object.keys(err))
+        res => {
+          console.log('SendFormData result: ', res); 
+          this.router.navigate(['/success']);
+        },
+        err => {
+          console.log('SendFormData error: ', err, Object.keys(err));
+          this.router.navigate(['/404', { error: 1 }]);
+        }
       );
       
     }

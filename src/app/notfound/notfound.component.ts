@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
 
 interface Error {
   notfound: string[],

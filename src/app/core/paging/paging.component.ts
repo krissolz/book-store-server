@@ -79,9 +79,10 @@ export class PagingComponent implements OnInit, OnChanges {
     this.bookObserve.subscribe( (res: Book[]) => { this.paging = res; this.getPages() } );
     let subscribtion = this.route.paramMap.pipe( map( (params: ParamMap) => params.get('id') ) );
     subscribtion.subscribe( res => this.page = +res );
+    this.onResize();
   }
 
-  onResize(e: Event){
+  onResize(e?: Event){
     this.pageimgNumber = this.book$.width$() >= mobile? desktopPages : mobilePages; 
     this.getPages();
   }

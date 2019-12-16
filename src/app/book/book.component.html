@@ -14,8 +14,8 @@
             {{ book.description }}
         </p>
         <p>
-            <button (click)="addToCart( book.id )">add to card</button>
-            <button (click)="removeFromCart( book.id )" *ngIf="checkBook(book.id)">remove from card</button>
+            <button (click)="addToCart( book.id )">add to cart</button>
+            <button (click)="removeFromCart( book.id )" *ngIf="checkBook(book.id)">remove from cart</button>
         </p>
     </section>
     <aside class="fr">

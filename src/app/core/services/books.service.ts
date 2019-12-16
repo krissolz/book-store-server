@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
-import { switchMap, startWith } from 'rxjs/operators';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { switchMap, catchError, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CookieService } from './cookie.service';
 
 import { Store } from '@ngrx/store';
 import { RouterState } from '@angular/router';
 import { selectCartBooks, selectBooks } from 'src/app/core/store/reducers';
-import { Book, LineItems } from '../models';
+import { Book, LineItems, ICustomerOrder } from '../models';
 
-const defParam: string = '';
-const orderUrl: string = '';
+const POST_URL: string = environment.postURL;
 const getBooksUrl: string = environment.getUrl;
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'dronsense-auth-token-80'
+  })
+};
 
 @Injectable()
 export class BooksService {
@@ -33,12 +39,12 @@ export class BooksService {
     this.store$.select( selectBooks ).subscribe( books => this.books = books );
   }
 
-  orderBook(): Observable<any> {
-    return this.myObservable.pipe(
-        startWith(environment.production? '' : defParam),
-        switchMap( param => this.http.post(orderUrl + param, 
-          { headers: new HttpHeaders().set('Content-Type', 'application/json') }), )
-      );
+  orderBook(order: ICustomerOrder): Observable<any> {
+    return this.http.post<ICustomerOrder>(POST_URL, order, httpOptions)
+    .pipe(
+      map( res => res ),
+      catchError(err => err)
+    );
   }
 
   addToCart(id: string){

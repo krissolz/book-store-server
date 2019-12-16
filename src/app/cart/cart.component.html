@@ -6,7 +6,7 @@
             <li *ngFor="let cBook of getUnic(cart); index as i;">
                 <h3>{{ i + 1 }}. {{ cBook.title }} <span>in a price of {{ cBook.price  | currency :'USD':'symbol':'1.2-2' }}</span></h3>
                 <p *ngIf="getNumber(cBook.id) > 1"><strong>{{ getNumber(cBook.id) }}</strong> copies of this book.</p>
-                <button (click)="removeFromCart( cBook.id )">remove <span *ngIf="getNumber(cBook.id) > 1">a copie</span> from card</button>
+                <button (click)="removeFromCart( cBook.id )">remove <span *ngIf="getNumber(cBook.id) > 1">a copie</span> from the cart</button>
             </li>
         </ol>
         <p *ngIf="!total">Your cart is empty.</p>
@@ -28,42 +28,42 @@
         <h3>Fill the form:</h3>
         <p>
             <strong>Full name:</strong> <span class="red">*</span><br />
-            <input type="text" name="fullName" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.fullName" #fullName="ngModel" [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)" />
+            <input type="text" name="fullName" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.fullName" #fullName="ngModel" [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)" />
             <span [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
             <strong>Country:</strong> <span class="red">*</span><br />
-            <input type="text" name="country" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.country" #country="ngModel" [class.error]="country.invalid && (country.dirty || country.touched)"  />
+            <input type="text" name="country" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.country" #country="ngModel" [class.error]="country.invalid && (country.dirty || country.touched)"  />
             <span [class.error]="country.invalid && (country.dirty || country.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
             <strong>State:</strong> <span class="red">*</span><br />
-            <input type="text" name="state"  (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.state" #state="ngModel" [class.error]="state.invalid && (state.dirty || state.touched)" />
+            <input type="text" name="state"  (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.state" #state="ngModel" [class.error]="state.invalid && (state.dirty || state.touched)" />
             <span [class.error]="state.invalid && (state.dirty || state.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
             <strong>Zip:</strong> <span class="red">*</span><br />
-            <input type="text" name="zip" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.zip" #zip="ngModel" [class.error]="zip.invalid && (zip.dirty || zip.touched)" />
+            <input type="text" name="zip" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.zip" #zip="ngModel" [class.error]="zip.invalid && (zip.dirty || zip.touched)" />
             <span [class.error]="zip.invalid && (zip.dirty || zip.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
             <strong>City:</strong> <span class="red">*</span><br />
-            <input type="text" name="city" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.city" #city="ngModel" [class.error]="city.invalid && (city.dirty || city.touched)" />
+            <input type="text" name="city" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.city" #city="ngModel" [class.error]="city.invalid && (city.dirty || city.touched)" />
             <span [class.error]="city.invalid && (city.dirty || city.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
             <strong>Address:</strong> <span class="red">*</span><br />
-            <textarea id="address" cols="30" rows="5" (blur)="checkFormData()" required minlength="10" name="address" [(ngModel)]="formFields.address" #address="ngModel" [class.error]="address.invalid && (address.dirty || address.touched)" ></textarea>
+            <textarea id="address" cols="30" rows="5" (input)="checkFormData()" required minlength="10" name="address" [(ngModel)]="formFields.address" #address="ngModel" [class.error]="address.invalid && (address.dirty || address.touched)" ></textarea>
             <span [class.error]="address.invalid && (address.dirty || address.touched)">
                 Error - Incorect data filled;
             </span>

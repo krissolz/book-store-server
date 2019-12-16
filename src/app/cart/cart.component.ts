@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-
 import { RouterState } from '@angular/router';
 import { StoreActions } from 'src/app/core/store/actions/books.action';
 import { selectCartBooks, selectBooks, selectCartTotal, selectCartIds } from 'src/app/core/store/reducers';
@@ -85,6 +84,13 @@ export class CartComponent implements OnInit {
 
       // make post request here
       console.log(this.customerOrder);
+
+      console.log( this.book$.orderBook(this.customerOrder) )
+
+      // this.book$.orderBook(this.customerOrder).subscribe(
+      //   res => console.log(res),
+      //   err => console.log(err)
+      // );
       
     }
   }

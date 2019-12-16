@@ -18,8 +18,7 @@ export interface LineItems {
     quantity: number
 }
 
-export interface CustomerOrder {
-    lineItems: LineItems[],
+export interface FormFields {
     fullName: string,
     address: string,
     city: string,
@@ -31,6 +30,14 @@ export interface CustomerOrder {
     cardNumber: number,
     cardExpiry: string,
     cardCVV: number
+}
+
+export interface CustomerOrder {
+    lineItems: LineItems[]
+}
+
+export interface ICustomerOrder extends CustomerOrder, FormFields {
+    
 }
 
 export interface BooksState {

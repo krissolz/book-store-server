@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { RouterState } from '@angular/router';
 import { StoreActions } from 'src/app/core/store/actions/books.action';
-import { selectCartBooks, selectBooks, selectCartTotal } from 'src/app/core/store/reducers';
-import { Book } from 'src/app/core/models';
+import { selectCartBooks, selectBooks, selectCartTotal, selectCartIds } from 'src/app/core/store/reducers';
+import { Book, FormFields, ICustomerOrder } from 'src/app/core/models';
 import { BooksService } from 'src/app/core/services/books.service';
 
 @Component({
@@ -13,19 +14,41 @@ import { BooksService } from 'src/app/core/services/books.service';
 })
 export class CartComponent implements OnInit {
 
+  @ViewChild('orderForm', {static: false}) orderForm: ElementRef;
+
   books: Book[];
   cart: Book[];
   total: number;
   order: boolean;
-
-  @ViewChildren('form') public form: ElementRef;
+  ids: string[];
+  customerOrder: ICustomerOrder;
+  formFields: FormFields;
+  validForm: number;
 
   constructor(
     private store$: Store<RouterState>,
-    private book$: BooksService
+    private book$: BooksService,
   ) {
     this.total = null;
     this.order = false;
+    this.ids = [];
+    this.customerOrder = null;
+
+    this.formFields = {
+      fullName: '',
+      address: '',
+      city: '',
+      zip: '',
+      state: '',
+      country: '',
+      paymentType: 0,
+      cardName: '',
+      cardNumber: 0,
+      cardExpiry: '',
+      cardCVV: 0
+    };
+
+    this.validForm = 1;
   }
 
   checkBook(id: string): boolean {
@@ -50,15 +73,34 @@ export class CartComponent implements OnInit {
 
   cancelForm(){
     this.order = false;
-    this.form.nativeElement.reset();
+    this.orderForm.nativeElement.reset();
   }
 
   sendFormData(){
-    
+    this.checkFormData();
+    if( this.validForm ) {
+      this.customerOrder = Object.assign({
+        lineItems: this.book$.countedBooks( this.ids )
+      }, this.formFields, {});
+
+      // make post request here
+      console.log(this.customerOrder);
+      
+    }
   }
 
   checkFormData(){
-    console.log( this.form.nativeElement )
+    let ngForm = this.orderForm.nativeElement, 
+        required = Object.keys(this.formFields).filter( key => ngForm[key].required );
+    
+    this.validForm = 1;
+
+    required.map( name => {
+      if( !ngForm[name].value || ngForm[name].minlength > ngForm[name].value.length ) {
+        this.validForm &= 0;
+        ngForm[name];
+      }
+    } );
   }
 
   ngOnInit() {
@@ -66,6 +108,7 @@ export class CartComponent implements OnInit {
     this.store$.select( selectBooks ).subscribe( books => this.books = books );
     this.store$.select( selectCartBooks ).subscribe( cBooks => { this.cart = cBooks; console.log( this.cart ) } );
     this.store$.select( selectCartTotal ).subscribe( total => this.total = total );
+    this.store$.select( selectCartIds ).subscribe( ids => this.ids = ids );
   }
 
 }

@@ -23,36 +23,54 @@
     </aside>
 </div>
 
-<div #form *ngIf="order && total" class="orderform">
-    <form name="booksOrderForm">
+<div *ngIf="order && total" class="orderform">
+    <form #orderForm name="booksOrderForm" class="form-group" novalidate>
         <h3>Fill the form:</h3>
         <p>
-            <strong>Full name:</strong><br />
-            <input type="text" name="fullName" />
+            <strong>Full name:</strong> <span class="red">*</span><br />
+            <input type="text" name="fullName" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.fullName" #fullName="ngModel" [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)" />
+            <span [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)">
+                Error - Incorect data filled;
+            </span>
         </p>
         <p>
-            <strong>Country:</strong><br />
-            <input type="text" name="country" />
+            <strong>Country:</strong> <span class="red">*</span><br />
+            <input type="text" name="country" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.country" #country="ngModel" [class.error]="country.invalid && (country.dirty || country.touched)"  />
+            <span [class.error]="country.invalid && (country.dirty || country.touched)">
+                Error - Incorect data filled;
+            </span>
         </p>
         <p>
-            <strong>State:</strong><br />
-            <input type="text" name="state" />
+            <strong>State:</strong> <span class="red">*</span><br />
+            <input type="text" name="state"  (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.state" #state="ngModel" [class.error]="state.invalid && (state.dirty || state.touched)" />
+            <span [class.error]="state.invalid && (state.dirty || state.touched)">
+                Error - Incorect data filled;
+            </span>
         </p>
         <p>
-            <strong>Zip:</strong><br />
-            <input type="text" name="zip" />
+            <strong>Zip:</strong> <span class="red">*</span><br />
+            <input type="text" name="zip" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.zip" #zip="ngModel" [class.error]="zip.invalid && (zip.dirty || zip.touched)" />
+            <span [class.error]="zip.invalid && (zip.dirty || zip.touched)">
+                Error - Incorect data filled;
+            </span>
         </p>
         <p>
-            <strong>City:</strong><br />
-            <input type="text" name="city" />
+            <strong>City:</strong> <span class="red">*</span><br />
+            <input type="text" name="city" (blur)="checkFormData()" required minlength="3" [(ngModel)]="formFields.city" #city="ngModel" [class.error]="city.invalid && (city.dirty || city.touched)" />
+            <span [class.error]="city.invalid && (city.dirty || city.touched)">
+                Error - Incorect data filled;
+            </span>
         </p>
         <p>
-            <strong>Address:</strong><br />
-            <textarea cols="30" rows="5" name="address" ></textarea>
+            <strong>Address:</strong> <span class="red">*</span><br />
+            <textarea id="address" cols="30" rows="5" (blur)="checkFormData()" required minlength="10" name="address" [(ngModel)]="formFields.address" #address="ngModel" [class.error]="address.invalid && (address.dirty || address.touched)" ></textarea>
+            <span [class.error]="address.invalid && (address.dirty || address.touched)">
+                Error - Incorect data filled;
+            </span>
         </p>
         <p>
             <strong>Payment Type:</strong><br />
-            <select name="paymentType">
+            <select name="paymentType" [(ngModel)]="formFields.paymentType">
                 <option value="0">---</option>
                 <option value="1">Credit Card</option>
                 <option value="2">Pay Pal</option>
@@ -63,7 +81,7 @@
         <div class="cartData">
             <p>
                 <strong>Card Name:</strong><br />
-                <select name="cardName">
+                <select name="cardName" [(ngModel)]="formFields.cardName">
                     <option value="">---</option>
                     <option value="american_express">American Express</option>
                     <option value="master_card">MasterCard</option>
@@ -76,14 +94,14 @@
             </p>
             <p>
                 <strong>Card Expiry:</strong><br />
-                <input type="text" name="cardExpiry" />
+                <input type="text" name="cardExpiry" [(ngModel)]="formFields.cardExpiry" />
             </p>
             <p>
                 <strong>Card CVV:</strong><br />
-                <input type="number" name="cardCVV" />
+                <input type="number" name="cardCVV" [(ngModel)]="formFields.cardCVV" />
             </p>
 
-            <button (click)="sendFormData()">Send the order</button>
+            <button (click)="sendFormData()" [disabled]="!this.validForm">Send the order</button>
             <button (click)="cancelForm()">Cancel the order</button>
             
         </div>

@@ -12,11 +12,20 @@ aside button {
         border-width: 1px 0;
         background: $orderformBg;
         padding: 25px;
+        span {
+            display: none;
+        }
+        span.error {
+            display: block;
+        }
     }
     button {
         font-size: 1.2rem;
     }
     button:nth-of-type(1) {
         margin-right: 10px;
+    }
+    button[disabled] {
+        background: $disabled;
     }
 }

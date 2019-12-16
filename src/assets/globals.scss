@@ -137,8 +137,16 @@ input, textarea, select {
     @extend %cart;
 }
 
+
+textarea.error,
+select.error,
+input.error {
+    border-color: $red;
+}
+
+.red,
 .error {
-    color: $error;
+    color: $red;
 }
 
 .desktop {

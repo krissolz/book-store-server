@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  getUrl: 'http://localhost:4200/assets/books.json',
+  getUrl: 'http://localhost:4200/assets/data/books.json',
   more: 3,
   pageingNumber: 10,
   mobilePagingNum: 3,

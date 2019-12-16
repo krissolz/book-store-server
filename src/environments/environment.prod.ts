@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  getUrl: './assets/books.json',
+  getUrl: './assets/data/books.json',
   more: 3,
   pageingNumber: 10,
   mobilePagingNum: 3,

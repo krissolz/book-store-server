@@ -16,8 +16,8 @@ const getBooksUrl: string = environment.getUrl;
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'dronsense-auth-token-80'
+    'Content-Type': 'application/json',
+    'No-Auth':'True'
   })
 };
 
@@ -40,11 +40,7 @@ export class BooksService {
   }
 
   orderBook(order: ICustomerOrder): Observable<any> {
-    return this.http.post<ICustomerOrder>(POST_URL, order, httpOptions)
-    .pipe(
-      map( res => res ),
-      catchError(err => err)
-    );
+    return this.http.post<any>(POST_URL, order, httpOptions);
   }
 
   addToCart(id: string){

@@ -27,42 +27,42 @@
     <form #orderForm name="booksOrderForm" class="form-group" novalidate>
         <h3>Fill the form:</h3>
         <p>
-            <strong>Full name:</strong> <span class="red">*</span><br />
+            <strong>Full name:</strong> <sup class="red">*</sup><br />
             <input type="text" name="fullName" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.fullName" #fullName="ngModel" [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)" />
             <span [class.error]="fullName.invalid && (fullName.dirty || fullName.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
-            <strong>Country:</strong> <span class="red">*</span><br />
+            <strong>Country:</strong> <sup class="red">*</sup><br />
             <input type="text" name="country" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.country" #country="ngModel" [class.error]="country.invalid && (country.dirty || country.touched)"  />
             <span [class.error]="country.invalid && (country.dirty || country.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
-            <strong>State:</strong> <span class="red">*</span><br />
+            <strong>State:</strong> <sup class="red">*</sup><br />
             <input type="text" name="state"  (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.state" #state="ngModel" [class.error]="state.invalid && (state.dirty || state.touched)" />
             <span [class.error]="state.invalid && (state.dirty || state.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
-            <strong>Zip:</strong> <span class="red">*</span><br />
+            <strong>Zip:</strong> <sup class="red">*</sup><br />
             <input type="text" name="zip" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.zip" #zip="ngModel" [class.error]="zip.invalid && (zip.dirty || zip.touched)" />
             <span [class.error]="zip.invalid && (zip.dirty || zip.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
-            <strong>City:</strong> <span class="red">*</span><br />
+            <strong>City:</strong> <sup class="red">*</sup><br />
             <input type="text" name="city" (input)="checkFormData()" required minlength="3" [(ngModel)]="formFields.city" #city="ngModel" [class.error]="city.invalid && (city.dirty || city.touched)" />
             <span [class.error]="city.invalid && (city.dirty || city.touched)">
                 Error - Incorect data filled;
             </span>
         </p>
         <p>
-            <strong>Address:</strong> <span class="red">*</span><br />
+            <strong>Address:</strong> <sup class="red">*</sup><br />
             <textarea id="address" cols="30" rows="5" (input)="checkFormData()" required minlength="10" name="address" [(ngModel)]="formFields.address" #address="ngModel" [class.error]="address.invalid && (address.dirty || address.touched)" ></textarea>
             <span [class.error]="address.invalid && (address.dirty || address.touched)">
                 Error - Incorect data filled;

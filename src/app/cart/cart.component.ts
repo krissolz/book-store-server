@@ -5,6 +5,8 @@ import { StoreActions } from 'src/app/core/store/actions/books.action';
 import { selectCartBooks, selectBooks, selectCartTotal, selectCartIds } from 'src/app/core/store/reducers';
 import { Book, FormFields, ICustomerOrder } from 'src/app/core/models';
 import { BooksService } from 'src/app/core/services/books.service';
+import { pipe } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -83,14 +85,12 @@ export class CartComponent implements OnInit {
       }, this.formFields, {});
 
       // make post request here
-      console.log(this.customerOrder);
+      console.log('customerOrder: \n\r', this.customerOrder);
 
-      console.log( this.book$.orderBook(this.customerOrder) )
-
-      // this.book$.orderBook(this.customerOrder).subscribe(
-      //   res => console.log(res),
-      //   err => console.log(err)
-      // );
+      this.book$.orderBook(this.customerOrder).subscribe(
+        res => console.log('SendFormData result: ', res),
+        err => console.log('SendFormData error: ', err, Object.keys(err))
+      );
       
     }
   }

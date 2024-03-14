@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { ServiceModule } from './core/services/service.module';
 import { SuccessComponent } from './success/success.component';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,14 @@ import { SuccessComponent } from './success/success.component';
     ServiceModule,
     CoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

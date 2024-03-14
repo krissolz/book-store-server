@@ -16,7 +16,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class CartComponent implements OnInit {
 
-  @ViewChild('orderForm', {static: false}) orderForm: ElementRef;
+  @ViewChild('orderForm') orderForm: ElementRef;
 
   books: Book[];
   cart: Book[];

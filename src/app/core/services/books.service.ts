@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
 import { switchMap, catchError, map } from 'rxjs/operators';
@@ -23,11 +23,11 @@ const httpOptions = {
 };
 
 @Injectable()
-export class BooksService {
+export class BooksService implements OnInit {
 
   private myObservable = new Subject<string>();
-  private cBooks: Book[];
-  private books: Book[];
+  public cBooks: Book[] = [];
+  public books: Book[] = [];
 
   constructor(
     private http: HttpClient, 
@@ -38,6 +38,10 @@ export class BooksService {
     this.route.queryParamMap.subscribe( queryParams => this.myObservable.next( queryParams.get('id') ) );
     this.store$.select( selectCartBooks ).subscribe( cBooks => this.cBooks = cBooks );
     this.store$.select( selectBooks ).subscribe( books => this.books = books );
+  }
+
+  ngOnInit(): void {
+    
   }
 
   orderBook(order: ICustomerOrder): Observable<any> {
@@ -51,8 +55,9 @@ export class BooksService {
 
   removeFromCart(id: string){
     const i = this.cBooks.findIndex(element => element.id === id);
-    this.cBooks.splice(i, 1);
-    return this.cBooks;
+    let arr = [...this.cBooks];
+    arr.splice(i, 1);
+    return arr;
   }
 
   checkCart(id: string): boolean {

@@ -8,26 +8,52 @@ export function booksReducer(state = initialState, action): BooksState {
 
     case StoreActions.GET_BOOKS_SUCCESS:
         
-        let booksList = action.payload;
         return Object.assign({}, state, {
-          booksList: [...booksList]
+          booksList: [...action.payload]
         });
 
     case StoreActions.ADD_TO_CART_SUCCESS:
-        let clone = Object.assign({}, state)
-        clone.cart.books = [...[action.payload], ...clone.cart.books];
-        clone.cart.order.ids.push(action.payload.id);
-        clone.cart.order.total += action.payload.price;
-        return clone;
+
+      const book = action.payload;
+
+      const books = [...state.cart.books, book];
+      const ids = [...state.cart.order.ids, book.id];
+      const total = state.cart.order.total + book.price;
+
+      return Object.assign({}, state, {
+        cart: {
+          ...state.cart,
+          books,
+          order: {
+            ...state.cart.order,
+            ids,
+            total
+          }
+        }
+      });
 
     case StoreActions.REMOVE_FROM_CART_SUCCESS:
-          let newState = Object.assign({}, state)
-          newState.cart.books = [...action.payload];
-          newState.cart.order.total = newState.cart.books.reduce( 
-            (price, currentValue) => price + currentValue.price
-            , 0 );
-          return newState;
-      
+          
+          const 
+            rBooks = action.payload,
+            rIds = [...state.cart.order.ids, rBooks.id],
+            rTotal = rBooks.reduce( 
+                  (price: number, currentValue: { price: number; }) => price + currentValue.price
+                  , 0 );
+        
+          return {
+            ...state,
+            cart: {
+              ...state.cart,
+              books: rBooks,
+              order: {
+                ...state.cart.order,
+                ids: rIds,
+                total: rTotal
+              }
+            }
+          };
+
     default: 
       return state;
       

@@ -18,8 +18,7 @@ export class StoreEffects {
 
   @Effect() fetch$: Observable<Action> = this.actions$.pipe(
     ofType(StoreActions.GET_BOOKS),
-    switchMap((action: StoreActions.GetBooks) =>
-      this.booksService.getAllBooks()),
+    switchMap((action: StoreActions.GetBooks) => this.booksService.getAllBooks()),
     map(data => {
       return new StoreActions.GetBooksSuccess(data);
     })

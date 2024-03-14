@@ -7,7 +7,7 @@ export const combineReducers: ActionReducerMap<RootState> = {
   store: booksReducer
 }
 
-export const selectState = state => state.store;
+export const selectState = (state: any) => state.store;
 export const selectBooks = createSelector(selectState, (state: BooksState) => state.booksList);
 export const selectCartBooks = createSelector(selectState, (state: BooksState) => state.cart.books);
 export const selectCartTotal = createSelector(selectState, (state: BooksState) => state.cart.order.total);

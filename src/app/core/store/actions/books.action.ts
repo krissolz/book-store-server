@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Book } from '../../models';
 
 export namespace StoreActions {
 
@@ -18,7 +19,7 @@ export namespace StoreActions {
 
   export class GetBooksSuccess implements Action {
     readonly type = GET_BOOKS_SUCCESS;
-    constructor(public payload: any) { }
+    constructor(public payload: Book[]) { }
   }
 
   export class OrderBook implements Action {
@@ -28,27 +29,27 @@ export namespace StoreActions {
 
   export class OrderBookSuccess implements Action {
     readonly type = ORDER_BOOK_SUCCESS;
-    constructor(public payload: any) { }
+    constructor(public payload: Book[]) { }
   }
 
   export class AddToCart implements Action {
     readonly type = ADD_TO_CART;
-    constructor(public id: any) { }
+    constructor(public id: string) { }
   }
 
   export class AddToCartSuccess implements Action {
     readonly type = ADD_TO_CART_SUCCESS;
-    constructor(public payload: any) { }
+    constructor(public payload: Book[]) { }
   }
 
   export class RemoveFromCart implements Action {
     readonly type = REMOVE_FROM_CART;
-    constructor(public id: any) { }
+    constructor(public id: string) { }
   }
 
   export class RemoveFromCartSuccess implements Action {
     readonly type = REMOVE_FROM_CART_SUCCESS;
-    constructor(public payload: any) { }
+    constructor(public payload: Book[]) { }
   }
 
   export type Actions =

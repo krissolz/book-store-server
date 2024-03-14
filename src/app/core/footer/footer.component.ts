@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  year: number;
+  public currentDate: string;
+  public contact: string;
 
   constructor() {
-    this.year = Date.now();
+    this.currentDate = Date.now().toString();
+    this.contact = 'info@bookstore.com';
   }
 
   ngOnInit() {

@@ -1,13 +1,21 @@
 @import 'src/styles.scss';
 
 footer {
-    clear: both;
     padding: 20px;
     background: $footerBg;
-    color: $footerColor;
-    text-align: center;
+    
+    section {
+        width: 100%;
+        color: $footerColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
 
-    .wrapper {
-        text-align: center;
+        div {
+            width: 20%;
+            text-align: center;
+        }
     }
+
 }

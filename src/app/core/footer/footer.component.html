@@ -1,7 +1,7 @@
 <footer>
-    <img src="https://assets-global.website-files.com/593da066e5608a435f48f966/5c59e06479bb925a2b7516dd_DS_WebsiteFooterLogoMarkTM-01.svg" width="56" height="46" alt="" class="footer-logo" />
-    <div class="wrapper x">
-        <div class="fr">512.582.0444 CONTACT@DRONESENSE.COM</div>
-        <div class="fl">&copy; {{ year | date: 'yyyy' }} DRONESENSE, INC.</div>
-    </div>
+    <section>
+        <div>&copy; {{ currentDate | date: 'yyyy' }}</div>
+        <div><img src="/assets/i/logo.png" width="56" height="56" alt="" class="footer-logo" /></div>
+        <div>email: <a [attr.href]="'mailto:' + contact">{{ contact }}</a></div>
+    </section>
 </footer>
